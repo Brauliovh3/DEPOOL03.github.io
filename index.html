@@ -2,322 +2,930 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Biblioteca Portafolio de Juegos</title>
-    <link rel="stylesheet" href="estilos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BVH3 CYBERGAMES - Biblioteca +18</title>
     <link rel="icon" href="Logo.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        html, body {
-            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
-            min-height: 100%;
-            height: 100%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        html, body {
+            background: radial-gradient(ellipse at center, #0f0f23 0%, #1a0033 50%, #000 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
         body {
             color: #e0e0e0;
-            font-family: 'Orbitron', Arial, sans-serif;
-            margin: 0;
+            font-family: 'Rajdhani', Arial, sans-serif;
+            position: relative;
         }
+
+        /* Partículas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff00cc;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            opacity: 0.7;
+        }
+
+        .particle:nth-child(2n) {
+            background: #00ffe7;
+            animation-duration: 8s;
+        }
+
+        .particle:nth-child(3n) {
+            background: #fffb00;
+            animation-duration: 10s;
+        }
+
+        /* Más partículas para PC */
+        @media (min-width: 1024px) {
+            .particle {
+                width: 3px;
+                height: 3px;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .particle {
+                width: 4px;
+                height: 4px;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animaciones principales */
         @keyframes rgb-border {
-            0%   { border-color: #ff00cc; }
-            25%  { border-color: #00ffe7; }
-            50%  { border-color: #fffb00; }
-            75%  { border-color: #00c3ff; }
-            100% { border-color: #ff00cc; }
+            0% { border-color: #ff00cc; box-shadow: 0 0 20px #ff00cc44; }
+            25% { border-color: #00ffe7; box-shadow: 0 0 20px #00ffe744; }
+            50% { border-color: #fffb00; box-shadow: 0 0 20px #fffb0044; }
+            75% { border-color: #00c3ff; box-shadow: 0 0 20px #00c3ff44; }
+            100% { border-color: #ff00cc; box-shadow: 0 0 20px #ff00cc44; }
         }
-        @keyframes rgb-logo {
-            0%   { stroke: #ff00cc; }
-            25%  { stroke: #00ffe7; }
-            50%  { stroke: #fffb00; }
-            75%  { stroke: #00c3ff; }
-            100% { stroke: #ff00cc; }
-        }
+
         @keyframes rgb-text {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
-        .cyber-header {
-            background: rgba(20, 30, 48, 0.95);
-            padding: 32px 0 18px 0;
-            box-shadow: 0 4px 24px #0008;
-            text-align: center;
-            border-bottom: 2px solid #00ffe7;
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
+
+        @keyframes glow-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px #ff00cc44, 0 0 40px #00ffe722, inset 0 0 20px #ffffff11;
+            }
+            50% { 
+                box-shadow: 0 0 30px #ff00cc88, 0 0 60px #00ffe744, inset 0 0 30px #ffffff22;
+            }
+        }
+
+        /* Header mejorado */
+        .cyber-header {
+            background: linear-gradient(135deg, rgba(20, 30, 48, 0.95) 0%, rgba(40, 20, 60, 0.9) 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, #ff00cc, #00ffe7, #fffb00, #00c3ff) 1;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Optimización del header para PC */
+        @media (min-width: 1024px) {
+            .cyber-header {
+                padding: 3rem 2rem;
+            }
+            
+            .logo-container {
+                gap: 2rem;
+            }
+            
+            .cyberpunk-logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .bvh3-title {
+                font-size: 4rem;
+            }
+            
+            .cyber-header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .cyber-header p {
+                font-size: 1.4rem;
+            }
+            
+            .age-warning {
+                max-width: 800px;
+                font-size: 1.2rem;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .cyber-header {
+                padding: 4rem 3rem;
+            }
+            
+            .bvh3-title {
+                font-size: 5rem;
+            }
+            
+            .cyber-header h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ff00cc22" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
         .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 18px;
-            margin-bottom: 10px;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
+
         .cyberpunk-logo {
-            width: 120px;      /* tamaño medio */
-            height: 120px;
-            display: block;
-            background: #181e2a;
-            border-radius: 24px;
-            box-shadow: 0 0 32px #00ffe799, 0 0 8px #ff00cc99;
-            margin-right: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #181e2a, #2a1845);
+            animation: glow-pulse 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
         }
-        .cyberpunk-logo .cyberpunk-border {
-            stroke-width: 4;
-            fill: none;
-            stroke: #ff00cc;
-            animation: rgb-logo 2.5s linear infinite;
+
+        .cyberpunk-logo:hover {
+            transform: rotate(5deg) scale(1.1);
         }
+
         .bvh3-title {
-            font-size: 2.8em;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #00ffe7;
-            text-shadow: 0 0 16px #ff00cc, 0 0 32px #00ffe7, 0 2px 8px #000a;
-            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 3px;
             text-transform: uppercase;
             background: linear-gradient(90deg, #ff00cc, #00ffe7, #fffb00, #00c3ff, #ff00cc);
             background-size: 400% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: rgb-text 4s linear infinite;
+            filter: drop-shadow(0 0 10px #ff00cc88);
         }
-        .rgb-glow {
-            color: #fff;
-            text-shadow: 0 0 8px #3b05fc, 0 0 16px #ff00cc, 0 0 32px #00ffe7;
-            margin-left: 8px;
-            font-size: 1.1em;
+
+        .age-warning {
+            background: linear-gradient(135deg, #ff006640, #cc003380);
+            border: 2px solid #ff0066;
+            border-radius: 15px;
+            padding: 1rem;
+            margin: 1rem auto;
+            max-width: 600px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            animation: pulse 2s infinite;
         }
+
         .cyber-header h1 {
-            margin: 0 0 8px 0;
-            font-size: 2em;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: #fff;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 20px #00ffe7;
         }
+
         .cyber-header p {
-            margin: 0 0 12px 0;
-            font-size: 1.1em;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             color: #b2fefa;
+            margin-bottom: 1rem;
         }
+
+        /* Grid mejorado y responsivo */
         .game-library {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 24px;
-            padding: 40px 10px 120px 10px;
-            min-height: 60vh;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            padding: 4rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
         }
+
+        /* Optimización para PC */
+        @media (min-width: 1200px) {
+            .game-library {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3rem;
+                padding: 5rem 3rem;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .game-library {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 3.5rem;
+                padding: 6rem 4rem;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .game-library {
+                grid-template-columns: repeat(6, 1fr);
+                max-width: 2000px;
+            }
+        }
+
+        /* Cards rediseñadas */
         .game-card {
-            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
-            border-radius: 18px;
-            border: 3px solid #00ffe7;
-            padding: 18px 14px 18px 14px;
-            width: 240px;
-            min-width: 200px;
-            max-width: 240px;
-            height: 370px;
+            background: linear-gradient(135deg, 
+                rgba(26, 41, 128, 0.9) 0%, 
+                rgba(38, 208, 206, 0.1) 50%, 
+                rgba(26, 41, 128, 0.9) 100%);
+            border-radius: 20px;
+            border: 2px solid transparent;
+            padding: 1.5rem;
             text-align: center;
             position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            animation: rgb-border 2.5s linear infinite;
-            transition: transform 0.2s, border-color 0.2s;
-            margin: 0 8px;
-            box-shadow: 0 2px 8px #000a;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            animation: rgb-border 4s linear infinite;
+            min-height: 480px;
         }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .game-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, #ff00cc, #00ffe7, #fffb00, #00c3ff, #ff00cc);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .game-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .game-card:hover::after {
+            opacity: 0.1;
+        }
+
         .game-card:hover {
-            transform: translateY(-8px) scale(1.04);
-            animation: rgb-border 1.2s linear infinite;
-            background: linear-gradient(135deg, #26d0ce 0%, #1a2980 100%);
+            transform: translateY(-15px) scale(1.05);
+            background: linear-gradient(135deg, 
+                rgba(38, 208, 206, 0.2) 0%, 
+                rgba(26, 41, 128, 0.9) 50%, 
+                rgba(255, 0, 204, 0.1) 100%);
+            animation-duration: 2s;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
+                        0 0 30px rgba(255, 0, 204, 0.3);
         }
+
+        /* Efectos especiales para PC */
+        @media (min-width: 1024px) {
+            .game-card {
+                min-height: 520px;
+                perspective: 1000px;
+            }
+            
+            .game-card:hover {
+                transform: translateY(-20px) scale(1.08) rotateX(5deg);
+            }
+            
+            .game-card img {
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            
+            .game-card:hover img {
+                transform: scale(1.1) rotateY(5deg);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            }
+        }
+
         .game-card img {
             width: 100%;
-            height: 140px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 12px #00ffe733;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
+
+        .game-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Optimización de imágenes para PC */
+        @media (min-width: 1024px) {
+            .game-card img {
+                height: 200px;
+                border-radius: 20px;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .game-card img {
+                height: 220px;
+            }
+        }
+
         .game-card h2 {
-            margin: 0 0 6px 0;
-            font-size: 1.2em;
-            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
             background: linear-gradient(90deg, #ff00cc, #00ffe7, #fffb00, #00c3ff, #ff00cc);
             background-size: 400% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: rgb-text 4s linear infinite;
-            text-shadow: 0 0 8px #00ffe7, 0 0 16px #00ffe7;
-            font-weight: bold;
             letter-spacing: 1px;
         }
+
         .game-card p {
-            font-size: 0.95em;
+            font-size: 0.95rem;
             color: #e0e0e0;
-            margin-bottom: 14px;
-            flex: 1 1 auto;
-            overflow: auto;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+            text-align: left;
         }
+
+        .game-rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .star {
+            color: #ffd700;
+            margin: 0 2px;
+            filter: drop-shadow(0 0 5px #ffd70088);
+        }
+
+        /* Botón mejorado */
         .cyber-btn {
             display: inline-block;
-            padding: 8px 18px;
-            font-size: 1em;
-            font-weight: bold;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
             color: #0f2027;
-            background: linear-gradient(90deg, #00ffe7 60%, #00c3ff 100%);
+            background: linear-gradient(135deg, #00ffe7 0%, #00c3ff 50%, #ff00cc 100%);
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 2px 12px #00ffe755;
             text-decoration: none;
-            transition: background 0.2s, color 0.2s, transform 0.2s;
-            margin-top: auto;
-            margin-bottom: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 255, 231, 0.4);
         }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+
         .cyber-btn:hover {
-            background: linear-gradient(90deg, #00c3ff 60%, #00ffe7 100%);
+            background: linear-gradient(135deg, #ff00cc 0%, #00c3ff 50%, #00ffe7 100%);
             color: #fff;
-            transform: scale(1.07);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 0, 204, 0.4);
         }
+
+        /* Botones más grandes en PC */
+        @media (min-width: 1024px) {
+            .cyber-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+                border-radius: 30px;
+            }
+            
+            .cyber-btn:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 15px 30px rgba(255, 0, 204, 0.5);
+            }
+        }
+
+        /* Footer mejorado */
         .cyber-footer {
-            background: rgba(20, 30, 48, 0.98);
+            background: linear-gradient(135deg, rgba(20, 30, 48, 0.95) 0%, rgba(40, 20, 60, 0.9) 100%);
             color: #00ffe7;
             text-align: center;
-            padding: 18px 0 10px 0;
-            font-size: 1.1em;
+            padding: 2rem 1rem;
+            font-size: 1.1rem;
             letter-spacing: 1px;
-            border-top: 2px solid #00ffe7;
-            box-shadow: 0 -2px 16px #00ffe733;
-            position: static;
+            border-top: 3px solid transparent;
+            border-image: linear-gradient(90deg, #ff00cc, #00ffe7, #fffb00, #00c3ff) 1;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
         }
-        @media (max-width: 700px) {
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .game-library {
-                flex-direction: column;
-                align-items: center;
-                gap: 18px;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2rem 1rem;
             }
+            
             .game-card {
-                width: 95vw;
-                max-width: 320px;
-                min-width: 180px;
+                max-width: none;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cyber-header {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-card {
+                padding: 1rem;
+            }
+            
+            .game-card img {
+                height: 150px;
+            }
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar personalizada para PC */
+        @media (min-width: 1024px) {
+            ::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: linear-gradient(180deg, #0f0f23, #1a0033);
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(180deg, #ff00cc, #00ffe7);
+                border-radius: 6px;
+                border: 2px solid #0f0f23;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(180deg, #00ffe7, #ff00cc);
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
             }
         }
     </style>
 </head>
 <body>
-    <header class="cyber-header">
+    <!-- Partículas de fondo -->
+    <div class="particles" id="particles"></div>
+
+    <header class="cyber-header loading">
+        <div class="header-bg"></div>
         <div class="logo-container">
             <img src="Logo.png" alt="BVH3 Logo" class="cyberpunk-logo">
-            <span class="bvh3-title">BVH3 <span class="rgb-glow">CYBERGAMES</span></span>
+            <span class="bvh3-title">BVH3 <span style="color: #ff00cc;">CYBER</span>GAMES</span>
         </div>
-        <h1>Biblioteca de Juegos</h1>
-        <p>Explora y descarga tus juegos favoritos</p>
+        <h1>🔞 Biblioteca de Juegos Adultos</h1>
+        <p>Contenido exclusivo para mayores de 18 años</p>
+        <div class="age-warning">
+            ⚠️ ADVERTENCIA: Este sitio contiene contenido para adultos (+18) ⚠️
+        </div>
     </header>
-    <main class="game-library">
-        <div class="game-card cyber-effect">
-            <img src="my.jpg" alt="Juego 1">
+
+    <main class="game-library loading">
+        <div class="game-card">
+            <img src="my.jpg" alt="My Hero Rising">
             <h2>My Hero Rising</h2>
-            <p>Conviértete en el héroe definitivo en una ciudad llena de peligros. Desarrolla tus poderes, enfréntate a villanos y salva a los inocentes en esta aventura inspirada en My Hero Academia.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Sumérgete en un mundo de superhéroes con un giro adulto. Desarrolla relaciones íntimas con heroínas mientras luchas contra el mal. Decisiones que afectan tanto el combate como las escenas románticas en esta parodia +18 de My Hero Academia.</p>
             <a href="https://cuty.io/5jm8YM" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="feeling.png" alt="Juego 2">
+
+        <div class="game-card">
+            <img src="feeling.png" alt="Teaching Feeling">
             <h2>Teaching Feeling</h2>
-            <p>Vive una historia emotiva donde tus decisiones afectan la vida de Sylvie. Crea lazos, cuida de ella y descubre diferentes finales en esta novela visual única.</p>
+            <div class="game-rating">
+                <span class="star">★★★★★</span>
+            </div>
+            <p>Una emotiva novela visual donde cuidas de Sylvie, una chica con un pasado traumático. Construye confianza, sana heridas emocionales y desarrolla una relación íntima paso a paso. Múltiples finales basados en tus decisiones y cuidados.</p>
             <a href="https://cuty.io/S9kJtZkCkV" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="isekai.jpg" alt="Juego 3">
+
+        <div class="game-card">
+            <img src="isekai.jpg" alt="Isekai Awakening">
             <h2>Isekai Awakening</h2>
-            <p>Despierta en un mundo alternativo lleno de magia y criaturas fantásticas. Explora, haz aliados y toma decisiones que cambiarán tu destino en este isekai interactivo.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Transportado a un mundo mágico lleno de elfas, demonios y diosas. Forma tu harén mientras exploras dungeons peligrosos. Sistema de combate por turnos combinado con escenas románticas interactivas y personalización de personajes.</p>
             <a href="https://cuty.io/N8f9oan6" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="college.jpg" alt="Juego 4">
+
+        <div class="game-card">
+            <img src="college.jpg" alt="My College">
             <h2>My College</h2>
-            <p>Vive la experiencia universitaria: haz amigos, supera exámenes y toma decisiones que marcarán tu futuro académico y personal en esta novela visual ambientada en la universidad.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Vive la experiencia universitaria completa: fiestas, estudios y romance. Interactúa con compañeras de clase, profesoras y staff. Gestiona tu tiempo entre académicos y relaciones íntimas en este simulador de vida universitaria para adultos.</p>
             <a href="https://cuty.io/ktMkRK" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="sister.jpg" alt="Juego 5">
+
+        <div class="game-card">
+            <img src="sister.jpg" alt="Sister Fight">
             <h2>Sister Fight</h2>
-            <p>Participa en intensos combates entre hermanas con habilidades únicas. Elige tu personaje favorito y demuestra quién es la mejor luchadora de la familia.</p>
+            <div class="game-rating">
+                <span class="star">★★★☆☆</span>
+            </div>
+            <p>Combates intensos entre hermanas con habilidades especiales y consecuencias íntimas. Elige tu luchadora favorita en torneos donde ganar significa más que solo victoria. Sistema de combate arcade con recompensas para adultos.</p>
             <a href="https://cuty.io/9pRQDPjo0B" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="survive.jpg" alt="Juego 6">
+
+        <div class="game-card">
+            <img src="survive.jpg" alt="Survive">
             <h2>Survive</h2>
-            <p>Enfréntate a un mundo hostil donde cada decisión cuenta. Busca recursos, forma alianzas y sobrevive a los peligros que acechan en cada rincón.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Supervivencia post-apocalíptica con elementos adultos. Forma alianzas íntimas para sobrevivir en un mundo hostil. Gestiona recursos, construye refugios y desarrolla relaciones románticas mientras luchas contra amenazas constantes.</p>
             <a href="https://cuty.io/mgkU0v8DN" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="tentacular.jpg" alt="Juego 7">
+
+        <div class="game-card">
+            <img src="tentacular.jpg" alt="Tentacular">
             <h2>Tentacular</h2>
-            <p>Sumérgete en una aventura misteriosa con criaturas tentaculares. Resuelve acertijos y descubre secretos ocultos en un mundo lleno de sorpresas.</p>
+            <div class="game-rating">
+                <span class="star">★★★☆☆</span>
+            </div>
+            <p>Aventura submarina con criaturas tentaculares misteriosas. Explora las profundidades oceánicas mientras descubres especies únicas con interacciones especiales. Combina exploración, puzzles y encuentros íntimos en las profundidades.</p>
             <a href="https://cuty.io/wMvLN" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="together.webp" alt="Juego 8">
+
+        <div class="game-card">
+            <img src="together.webp" alt="Together Again">
             <h2>Together Again</h2>
-            <p>Reencuéntrate con viejos amigos y revive recuerdos en esta emotiva historia donde las decisiones pueden cambiar el rumbo de tu vida.</p>
+            <div class="game-rating">
+                <span class="star">★★★★★</span>
+            </div>
+            <p>Reencuentro emotivo con viejos amores del pasado. Revive memorias, reconstruye relaciones rotas y toma decisiones que cambiarán tu futuro romántico. Historia madura sobre segundas oportunidades y amor verdadero.</p>
             <a href="https://cuty.io/YqBtVH" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="tuition.jpg" alt="Juego 9">
+
+        <div class="game-card">
+            <img src="tuition.jpg" alt="Tuition Academia">
             <h2>Tuition Academia</h2>
-            <p>Gestiona tu vida académica y social en una prestigiosa academia. Supera retos, haz amigos y descubre secretos en este simulador escolar.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Simulador de academia privada donde eres tutor personal de estudiantes especiales. Ayuda con estudios mientras desarrollas relaciones más profundas. Balancea enseñanza académica con lecciones más íntimas y personales.</p>
             <a href="https://cuty.io/jqAsqQG3pB0s" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="waifu.jpg" alt="Juego 10">
+
+        <div class="game-card">
+            <img src="waifu.jpg" alt="Waifu Hub 2">
             <h2>Waifu Hub 2</h2>
-            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Segundo episodio del popular simulador de entrevistas. Interactúa con waifus famosas del anime en shows íntimos personalizables. Desbloquea contenido exclusivo, personaliza escenarios y crea tu propio estudio de entretenimiento adulto.</p>
             <a href="https://cuty.io/c5JfcO" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="country.png" alt="Juego 11">
-            <h2>Daily of my countryside</h2>
-            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+
+        <div class="game-card">
+            <img src="country.png" alt="Daily of my countryside">
+            <h2>Daily of my Countryside</h2>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Vida rural tranquila con encuentros románticos inesperados. Gestiona tu granja mientras conoces a las habitantes locales. Agricultura relajante combinada con relaciones íntimas en un ambiente campestre idílico y pacífico.</p>
             <a href="https://cuty.io/Vy7lkN" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="lovely.jpg" alt="Juego 12">
+
+        <div class="game-card">
+            <img src="lovely.jpg" alt="Lovely Piston Craft">
             <h2>Lovely Piston Craft</h2>
-            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <div class="game-rating">
+                <span class="star">★★★☆☆</span>
+            </div>
+            <p>Simulador mecánico con toques románticos. Repara vehículos mientras interactúas con clientas especiales que necesitan más que solo reparaciones. Combina habilidades técnicas con encuentros íntimos en tu taller personalizado.</p>
             <a href="https://cuty.io/NAt9aL" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="welcum.jpg" alt="Juego 13">
+
+        <div class="game-card">
+            <img src="welcum.jpg" alt="Welcum to City">
             <h2>Welcum to City</h2>
-            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Llega a una nueva ciudad llena de oportunidades románticas. Explora diferentes distritos, conoce residentes únicos y construye tu reputación. Simulador de vida urbana con múltiples caminos románticos y profesionales para adultos.</p>
             <a href="https://cuty.io/GlEmeQwP" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="pocket.png" alt="Juego 14">
+
+        <div class="game-card">
+            <img src="pocket.png" alt="Pocket Touch Simulator">
             <h2>Pocket Touch Simulator</h2>
-            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <div class="game-rating">
+                <span class="star">★★★☆☆</span>
+            </div>
+            <p>Simulador táctil interactivo con interfaz innovadora. Experiencia inmersiva diseñada para dispositivos móviles con controles únicos. Personaliza interacciones, desbloquea modos especiales y disfruta de una experiencia táctil realista.</p>
             <a href="https://cuty.io/PKzzCi6uA" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="night.png" alt="Juego 15">
+
+        <div class="game-card">
+            <img src="night.png" alt="Midnight Shifts with Femboy">
             <h2>Midnight Shifts with Femboy</h2>
-            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <div class="game-rating">
+                <span class="star">★★★★☆</span>
+            </div>
+            <p>Trabajos nocturnos que se vuelven más interesantes con tu compañero especial. Gestiona responsabilidades laborales mientras desarrollas una relación única. Horario nocturno, ambiente íntimo y decisiones que afectan tu relación laboral y personal.</p>
             <a href="https://cuty.io/3JIJgx" class="cyber-btn" download>Descargar</a>
         </div>
-        <div class="game-card cyber-effect">
-            <img src="Ntr.webp" alt="Juego 16">
+
+        <div class="game-card">
+            <img src="Ntr.webp" alt="Shopkeeper's Wife NTR">
             <h2>Shopkeeper's Wife NTR</h2>
-            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <div class="game-rating">
+                <span class="star">★★★☆☆</span>
+            </div>
+            <p>Drama matrimonial complejo con múltiples perspectivas. Navega relaciones complicadas en un pequeño pueblo donde todos se conocen. Historia madura que explora temas de confianza, tentación y consecuencias de decisiones arriesgadas.</p>
             <a href="https://cuty.io/xGoT0QTADBL" class="cyber-btn" download>Descargar</a>
         </div>
     </main>
-    <footer class="cyber-footer">
-        <p>&copy; 2025 BVH3 CYBERGAMES</p>
+
+    <footer class="cyber-footer loading">
+        <p>&copy; 2025 BVH3 CYBERGAMES | Contenido exclusivo +18 | Todos los derechos reservados</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">
+            Advertencia: Este sitio contiene material para adultos. Debe ser mayor de 18 años para acceder.
+        </p>
     </footer>
+
     <script>
-        const border = document.querySelector('.cyberpunk-border');
-        if (border) {
-            border.style.animation = "rgb-logo 2.5s linear infinite";
+        // Crear partículas de fondo
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            let particleCount = 25; // Por defecto móviles
+            
+            // Más partículas para PC
+            if (window.innerWidth > 1440) {
+                particleCount = 100;
+            } else if (window.innerWidth > 1024) {
+                particleCount = 75;
+            } else if (window.innerWidth > 768) {
+                particleCount = 50;
+            }
+            
+            // Limpiar partículas existentes
+            particlesContainer.innerHTML = '';
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
         }
+
+        // Animación de carga
+        function animateOnLoad() {
+            const elements = document.querySelectorAll('.loading');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.animationDelay = `${index * 0.2}s`;
+                }, index * 100);
+            });
+        }
+
+        // Optimización para diferentes dispositivos
+        function optimizeForDevice() {
+            const isMobile = window.innerWidth <= 768;
+            const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+            const isDesktop = window.innerWidth > 1024;
+            
+            const cards = document.querySelectorAll('.game-card');
+            
+            if (isMobile) {
+                // Reducir efectos en móviles para mejor rendimiento
+                cards.forEach(card => {
+                    card.style.animationDuration = '6s';
+                });
+            } else if (isTablet) {
+                // Efectos moderados para tablets
+                cards.forEach(card => {
+                    card.style.animationDuration = '4s';
+                });
+            } else if (isDesktop) {
+                // Efectos completos para PC
+                cards.forEach(card => {
+                    card.style.animationDuration = '3s';
+                });
+                
+                // Agregar efectos adicionales solo para PC
+                addDesktopEffects();
+            }
+        }
+
+        // Efectos especiales para PC
+        function addDesktopEffects() {
+            if (window.innerWidth > 1024) {
+                // Efecto parallax suave para el header
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const header = document.querySelector('.cyber-header');
+                    if (header) {
+                        header.style.transform = `translateY(${scrolled * 0.1}px)`;
+                    }
+                });
+
+                // Efecto cursor personalizado
+                document.addEventListener('mousemove', (e) => {
+                    const cursor = document.querySelector('.custom-cursor');
+                    if (!cursor) {
+                        const newCursor = document.createElement('div');
+                        newCursor.className = 'custom-cursor';
+                        newCursor.style.cssText = `
+                            position: fixed;
+                            width: 20px;
+                            height: 20px;
+                            background: radial-gradient(circle, #ff00cc, transparent);
+                            border-radius: 50%;
+                            pointer-events: none;
+                            z-index: 9999;
+                            opacity: 0.6;
+                            transition: transform 0.1s ease;
+                        `;
+                        document.body.appendChild(newCursor);
+                    }
+                    
+                    const currentCursor = document.querySelector('.custom-cursor');
+                    if (currentCursor) {
+                        currentCursor.style.left = e.clientX - 10 + 'px';
+                        currentCursor.style.top = e.clientY - 10 + 'px';
+                    }
+                });
+            }
+        }
+
+        // Lazy loading para imágenes
+        function lazyLoadImages() {
+            const images = document.querySelectorAll('img');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '0';
+                        img.style.transition = 'opacity 0.5s';
+                        setTimeout(() => {
+                            img.style.opacity = '1';
+                        }, 100);
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Smooth scroll para botones
+        function addSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Inicializar todo cuando la página carga
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            animateOnLoad();
+            optimizeForDevice();
+            lazyLoadImages();
+            addSmoothScrolling();
+        });
+
+        // Reoptimizar en resize
+        window.addEventListener('resize', () => {
+            optimizeForDevice();
+            createParticles(); // Recrear partículas con nueva cantidad
+        });
     </script>
-    <script src="animaciones.js"></script>
-</body>
-</html>
