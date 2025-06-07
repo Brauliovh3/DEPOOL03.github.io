@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Portafolio de Juegos</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="icon" href="Logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            min-height: 100%;
+            height: 100%;
+        }
+        body {
+            color: #e0e0e0;
+            font-family: 'Orbitron', Arial, sans-serif;
+            margin: 0;
+        }
+        @keyframes rgb-border {
+            0%   { border-color: #ff00cc; }
+            25%  { border-color: #00ffe7; }
+            50%  { border-color: #fffb00; }
+            75%  { border-color: #00c3ff; }
+            100% { border-color: #ff00cc; }
+        }
+        @keyframes rgb-logo {
+            0%   { stroke: #ff00cc; }
+            25%  { stroke: #00ffe7; }
+            50%  { stroke: #fffb00; }
+            75%  { stroke: #00c3ff; }
+            100% { stroke: #ff00cc; }
+        }
+        @keyframes rgb-text {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .cyber-header {
+            background: rgba(20, 30, 48, 0.95);
+            padding: 32px 0 18px 0;
+            box-shadow: 0 4px 24px #0008;
+            text-align: center;
+            border-bottom: 2px solid #00ffe7;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 10px;
+        }
+        .cyberpunk-logo {
+            width: 120px;      /* tamaño medio */
+            height: 120px;
+            display: block;
+            background: #181e2a;
+            border-radius: 24px;
+            box-shadow: 0 0 32px #00ffe799, 0 0 8px #ff00cc99;
+            margin-right: 10px;
+        }
+        .cyberpunk-logo .cyberpunk-border {
+            stroke-width: 4;
+            fill: none;
+            stroke: #ff00cc;
+            animation: rgb-logo 2.5s linear infinite;
+        }
+        .bvh3-title {
+            font-size: 2.8em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #00ffe7;
+            text-shadow: 0 0 16px #ff00cc, 0 0 32px #00ffe7, 0 2px 8px #000a;
+            font-family: 'Orbitron', Arial, sans-serif;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ff00cc, #00ffe7, #fffb00, #00c3ff, #ff00cc);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgb-text 4s linear infinite;
+        }
+        .rgb-glow {
+            color: #fff;
+            text-shadow: 0 0 8px #3b05fc, 0 0 16px #ff00cc, 0 0 32px #00ffe7;
+            margin-left: 8px;
+            font-size: 1.1em;
+        }
+        .cyber-header h1 {
+            margin: 0 0 8px 0;
+            font-size: 2em;
+            color: #fff;
+            letter-spacing: 1.5px;
+        }
+        .cyber-header p {
+            margin: 0 0 12px 0;
+            font-size: 1.1em;
+            color: #b2fefa;
+        }
+        .game-library {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            padding: 40px 10px 120px 10px;
+            min-height: 60vh;
+        }
+        .game-card {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            border-radius: 18px;
+            border: 3px solid #00ffe7;
+            padding: 18px 14px 18px 14px;
+            width: 240px;
+            min-width: 200px;
+            max-width: 240px;
+            height: 370px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            animation: rgb-border 2.5s linear infinite;
+            transition: transform 0.2s, border-color 0.2s;
+            margin: 0 8px;
+            box-shadow: 0 2px 8px #000a;
+        }
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            animation: rgb-border 1.2s linear infinite;
+            background: linear-gradient(135deg, #26d0ce 0%, #1a2980 100%);
+        }
+        .game-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 12px #00ffe733;
+        }
+        .game-card h2 {
+            margin: 0 0 6px 0;
+            font-size: 1.2em;
+            color: #fff;
+            background: linear-gradient(90deg, #ff00cc, #00ffe7, #fffb00, #00c3ff, #ff00cc);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rgb-text 4s linear infinite;
+            text-shadow: 0 0 8px #00ffe7, 0 0 16px #00ffe7;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .game-card p {
+            font-size: 0.95em;
+            color: #e0e0e0;
+            margin-bottom: 14px;
+            flex: 1 1 auto;
+            overflow: auto;
+        }
+        .cyber-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #0f2027;
+            background: linear-gradient(90deg, #00ffe7 60%, #00c3ff 100%);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 12px #00ffe755;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            margin-top: auto;
+            margin-bottom: 0;
+        }
+        .cyber-btn:hover {
+            background: linear-gradient(90deg, #00c3ff 60%, #00ffe7 100%);
+            color: #fff;
+            transform: scale(1.07);
+        }
+        .cyber-footer {
+            background: rgba(20, 30, 48, 0.98);
+            color: #00ffe7;
+            text-align: center;
+            padding: 18px 0 10px 0;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            border-top: 2px solid #00ffe7;
+            box-shadow: 0 -2px 16px #00ffe733;
+            position: static;
+        }
+        @media (max-width: 700px) {
+            .game-library {
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+            }
+            .game-card {
+                width: 95vw;
+                max-width: 320px;
+                min-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="cyber-header">
+        <div class="logo-container">
+            <img src="Logo.png" alt="BVH3 Logo" class="cyberpunk-logo">
+            <span class="bvh3-title">BVH3 <span class="rgb-glow">CYBERGAMES</span></span>
+        </div>
+        <h1>Biblioteca de Juegos</h1>
+        <p>Explora y descarga tus juegos favoritos</p>
+    </header>
+    <main class="game-library">
+        <div class="game-card cyber-effect">
+            <img src="my.jpg" alt="Juego 1">
+            <h2>My Hero Rising</h2>
+            <p>Conviértete en el héroe definitivo en una ciudad llena de peligros. Desarrolla tus poderes, enfréntate a villanos y salva a los inocentes en esta aventura inspirada en My Hero Academia.</p>
+            <a href="https://cuty.io/5jm8YM" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="feeling.png" alt="Juego 2">
+            <h2>Teaching Feeling</h2>
+            <p>Vive una historia emotiva donde tus decisiones afectan la vida de Sylvie. Crea lazos, cuida de ella y descubre diferentes finales en esta novela visual única.</p>
+            <a href="https://cuty.io/S9kJtZkCkV" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="isekai.jpg" alt="Juego 3">
+            <h2>Isekai Awakening</h2>
+            <p>Despierta en un mundo alternativo lleno de magia y criaturas fantásticas. Explora, haz aliados y toma decisiones que cambiarán tu destino en este isekai interactivo.</p>
+            <a href="https://cuty.io/N8f9oan6" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="college.jpg" alt="Juego 4">
+            <h2>My College</h2>
+            <p>Vive la experiencia universitaria: haz amigos, supera exámenes y toma decisiones que marcarán tu futuro académico y personal en esta novela visual ambientada en la universidad.</p>
+            <a href="https://cuty.io/ktMkRK" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="sister.jpg" alt="Juego 5">
+            <h2>Sister Fight</h2>
+            <p>Participa en intensos combates entre hermanas con habilidades únicas. Elige tu personaje favorito y demuestra quién es la mejor luchadora de la familia.</p>
+            <a href="https://cuty.io/9pRQDPjo0B" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="survive.jpg" alt="Juego 6">
+            <h2>Survive</h2>
+            <p>Enfréntate a un mundo hostil donde cada decisión cuenta. Busca recursos, forma alianzas y sobrevive a los peligros que acechan en cada rincón.</p>
+            <a href="https://cuty.io/mgkU0v8DN" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="tentacular.jpg" alt="Juego 7">
+            <h2>Tentacular</h2>
+            <p>Sumérgete en una aventura misteriosa con criaturas tentaculares. Resuelve acertijos y descubre secretos ocultos en un mundo lleno de sorpresas.</p>
+            <a href="https://cuty.io/wMvLN" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="together.webp" alt="Juego 8">
+            <h2>Together Again</h2>
+            <p>Reencuéntrate con viejos amigos y revive recuerdos en esta emotiva historia donde las decisiones pueden cambiar el rumbo de tu vida.</p>
+            <a href="https://cuty.io/YqBtVH" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="tuition.jpg" alt="Juego 9">
+            <h2>Tuition Academia</h2>
+            <p>Gestiona tu vida académica y social en una prestigiosa academia. Supera retos, haz amigos y descubre secretos en este simulador escolar.</p>
+            <a href="https://cuty.io/jqAsqQG3pB0s" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="waifu.jpg" alt="Juego 10">
+            <h2>Waifu Hub 2</h2>
+            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <a href="https://cuty.io/c5JfcO" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="country.png" alt="Juego 11">
+            <h2>Daily of my countryside</h2>
+            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <a href="https://cuty.io/Vy7lkN" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="lovely.jpg" alt="Juego 12">
+            <h2>Lovely Piston Craft</h2>
+            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <a href="https://cuty.io/NAt9aL" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="welcum.jpg" alt="Juego 13">
+            <h2>Welcum to City</h2>
+            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <a href="https://cuty.io/GlEmeQwP" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="pocket.png" alt="Juego 14">
+            <h2>Pocket Touch Simulator</h2>
+            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <a href="https://cuty.io/PKzzCi6uA" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="night.png" alt="Juego 15">
+            <h2>Midnight Shifts with Femboy</h2>
+            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <a href="https://cuty.io/3JIJgx" class="cyber-btn" download>Descargar</a>
+        </div>
+        <div class="game-card cyber-effect">
+            <img src="Ntr.webp" alt="Juego 16">
+            <h2>Shopkeeper's Wife NTR</h2>
+            <p>Conoce y entrevista a carismáticas waifus en este divertido simulador. Descubre historias, desbloquea escenas y crea tu propio show de entrevistas.</p>
+            <a href="https://cuty.io/xGoT0QTADBL" class="cyber-btn" download>Descargar</a>
+        </div>
+    </main>
+    <footer class="cyber-footer">
+        <p>&copy; 2025 BVH3 CYBERGAMES</p>
+    </footer>
+    <script>
+        const border = document.querySelector('.cyberpunk-border');
+        if (border) {
+            border.style.animation = "rgb-logo 2.5s linear infinite";
+        }
+    </script>
+    <script src="animaciones.js"></script>
+</body>
+</html>
