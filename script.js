@@ -2,10 +2,10 @@
 
 // Slider de imágenes
 const sliderImages = [
-    'https://images.unsplash.com/photo-1518611012118-696072aa579a',
-    'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
-    'https://images.unsplash.com/photo-1519864600265-abb23847ef2c',
-    'https://images.unsplash.com/photo-1464983953574-0892a716854b'
+    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1549476464-37392f717541?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1434596922112-19c563067271?w=800&h=600&fit=crop'
 ];
 let currentImg = 0;
 const slideImg = document.getElementById('slide-img');

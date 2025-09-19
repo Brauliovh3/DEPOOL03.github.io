@@ -1,13 +1,15 @@
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f7f7f7;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
 }
 nav {
-    background: #2d8f6f;
-    padding: 10px 0;
+    background: linear-gradient(135deg, #4c63d2 0%, #6366f1 100%);
+    padding: 15px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 nav .navbar-container {
     display: flex;
@@ -35,7 +37,8 @@ nav .navbar-container {
     transition: color 0.2s;
 }
 .navbar-links li a:hover, .navbar-links li a.active {
-    color: #ffe082;
+    color: #fbbf24;
+    transform: translateY(-2px);
 }
 /* Bienvenida con logo al costado */
 .bienvenida-flex {
@@ -51,28 +54,91 @@ nav .navbar-container {
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 section {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     margin: 30px auto;
-    padding: 20px;
+    padding: 30px;
     max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 form input, form textarea {
     width: 95%;
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+form input:focus, form textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    background: rgba(255, 255, 255, 1);
 }
 form button {
-    background: #2d8f6f;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 12px 24px;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 form button:hover {
-    background: #256e56;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Estilos adicionales */
+h1, h2 {
+    color: #1f2937;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.slider {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.slider img {
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.slider img:hover {
+    transform: scale(1.05);
+}
+
+.slider button {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.slider button:hover {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    transform: scale(1.1);
 }
